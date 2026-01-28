@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>FriendConnect — Make Real Connections</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #07090f;
+      --panel: #0c1020;
+      --border: #1e2438;
+      --text: #ffffff;
+      --muted: #9aa4c7;
+      --primary: #a78bfa;
+      --primary-soft: rgba(167,139,250,0.15);
+      --grid: rgba(255,255,255,0.04);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Inter, sans-serif;
+      color: var(--text);
+      background:
+        linear-gradient(var(--grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid) 1px, transparent 1px),
+        var(--bg);
+      background-size: 40px 40px;
+    }
+
+    a { text-decoration: none; color: inherit; cursor: pointer; }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(7,9,15,0.85);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav {
+      max-width: 1200px;
+      margin: auto;
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-weight: 800;
+      font-size: 20px;
+      color: var(--primary);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .nav-cta {
+      background: var(--primary);
+      color: #000;
+      padding: 10px 16px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 120px 20px 90px;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .badge {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+
+    .badge .material-icons {
+      font-size: 16px;
+      color: var(--primary);
+    }
+
+    .hero h1 {
+      font-size: 56px;
+      line-height: 1.1;
+      margin: 0;
+    }
+
+    .hero h1 span { color: var(--primary); }
+
+    .hero p {
+      margin-top: 20px;
+      font-size: 18px;
+      color: var(--muted);
+    }
+
+    .hero-buttons {
+      margin-top: 32px;
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #000;
+      padding: 14px 22px;
+      border-radius: 12px;
+      font-weight: 600;
+    }
+
+    .btn-secondary {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      padding: 14px 22px;
+      border-radius: 12px;
+      font-weight: 600;
+    }
+
+    section {
+      max-width: 1200px;
+      margin: auto;
+      padding: 90px 20px;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 55px;
+    }
+
+    .section-title h2 {
+      font-size: 40px;
+      margin-bottom: 12px;
+    }
+
+    .section-title p {
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: linear-gradient(180deg, rgba(167,139,250,0.06), transparent);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 26px;
+      transition: transform .15s ease, border-color .15s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: var(--primary);
+    }
+
+    .card-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: var(--primary-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 14px;
+    }
+
+    .card-icon .material-icons {
+      color: var(--primary);
+      font-size: 22px;
+    }
+
+    .card h3 {
+      margin: 0 0 10px;
+      font-size: 18px;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .price {
+      font-size: 36px;
+      font-weight: 800;
+      margin: 16px 0;
+      color: var(--primary);
+    }
+
+    .cta {
+      text-align: center;
+      background: radial-gradient(circle at top, var(--primary-soft), transparent 65%);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: 90px 20px;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 20px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="nav">
+    <div class="logo">FriendConnect</div>
+    <div class="nav-links">
+      <a data-scroll="#features">Features</a>
+      <a data-scroll="#safety">Safety</a>
+      <a data-scroll="#plans">Plans</a>
+    </div>
+    <a class="nav-cta" data-link="/signup">Get Started</a>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="badge">
+    <span class="material-icons">auto_awesome</span>
+    A better way to meet people
+  </div>
+
+  <h1>Welcome to <span>FriendConnect</span></h1>
+  <p>The website focused directly on making friends</p>
+
+  <div class="hero-buttons">
+    <a class="btn-primary" data-link="https://cocobeams.github.io/Regalium/">Create Your Profile</a>
+    <a class="btn-secondary" data-scroll="#features">Explore Features</a>
+  </div>
+</div>
+
+<section id="features">
+  <div class="section-title">
+    <h2>Why FriendConnect?</h2>
+    <p>Everything you need to make meaningful connections.</p>
+  </div>
+
+  <div class="features">
+    <div class="card"><div class="card-icon"><span class="material-icons">psychology</span></div><h3>Smart Matching</h3><p>Find people who share your interests.</p></div>
+    <div class="card"><div class="card-icon"><span class="material-icons">verified</span></div><h3>Real Profiles</h3><p>Verification keeps things authentic.</p></div>
+    <div class="card"><div class="card-icon"><span class="material-icons">chat</span></div><h3>Private Messaging</h3><p>Clean and secure chats.</p></div>
+  </div>
+</section>
+
+<section id="safety" style="background:linear-gradient(180deg,rgba(167,139,250,.15),transparent);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div class="section-title">
+    <h2>Safety Comes First</h2>
+    <p>Your comfort and privacy always come first.</p>
+  </div>
+
+  <div class="features">
+    <div class="card"><div class="card-icon"><span class="material-icons">verified_user</span></div><h3>Verified Accounts</h3><p>Reduces fake and harmful profiles.</p></div>
+    <div class="card"><div class="card-icon"><span class="material-icons">report</span></div><h3>Easy Reporting</h3><p>Report anything inappropriate instantly.</p></div>
+    <div class="card"><div class="card-icon"><span class="material-icons">lock</span></div><h3>Secure Moderation</h3><p>Moderators quickly assess any problems</p></div>
+  </div>
+</section>
+
+<section id="plans">
+  <div class="section-title">
+    <h2>Simple Plans</h2>
+    <p>Choose what works for you.</p>
+  </div>
+
+  <div class="features">
+    <div class="card"><div class="card-icon"><span class="material-icons">lock_open</span></div><h3>Free</h3><div class="price">$0</div><p>All core features included.</p></div>
+    <div class="card"><div class="card-icon"><span class="material-icons">star</span></div><h3>Premium</h3><div class="price">COMING SOON</div><p>Boosts and extra tools.</p></div>
+  </div>
+</section>
+
+<section class="cta">
+  <h2>Start Making Friends Today</h2>
+  <p>The new to make friends is right here!</p>
+  <div class="hero-buttons">
+    <a class="btn-primary" data-link="/signup">Join FriendConnect</a>
+    <a class="btn-secondary" data-scroll="#safety">Learn About Safety</a>
+  </div>
+</section>
+
+<footer>
+  © 2026 RegaliumGF Entertainment Group. Check our Privacy Policy and Terms at Regalium
+</footer>
+
+<script>
+  document.querySelectorAll('[data-scroll]').forEach(el => {
+    el.addEventListener('click', () => {
+      const target = document.querySelector(el.dataset.scroll);
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+
+  document.querySelectorAll('[data-link]').forEach(el => {
+    el.addEventListener('click', () => {
+      window.location.href = el.dataset.link;
+    });
+  });
+</script>
+
+</body>
+</html>
